@@ -1,0 +1,5 @@
+new  -s mainSession -n mainWindow #echo main
+neww -n sshWindow
+splitw -v -p 50 -t 0  ssh -t root@raidan.case.edu "zsh"
+selectw -t 0
+

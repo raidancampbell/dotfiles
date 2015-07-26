@@ -1,0 +1,10 @@
+# don't display the copyright page
+startup_message off
+
+escape ^Bb #remap the escape key, so that I can screen in tmux
+# screen inside a local tmux session isn't working
+# tmuxing here, and screening remotely is working.
+# my .tmux.conf is bound to ^a
+# yes, I know these are just reversed between the two.
+# but I got used to them like that.  Suck it up.
+
