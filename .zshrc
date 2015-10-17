@@ -17,6 +17,18 @@ source ~/.zsh/functions.zsh
 # source the personal aliases, containing hostnames and whatnot
 source ~/.zsh/personal.zsh
 
+# thanks https://github.com/solnic/dotfiles/blob/master/home/zsh/key-bindings.zsh
+bindkey -e
+bindkey '^[[1;9D' backward-word # iterm
+bindkey '^[^[[D' backward-word # tmux os x
+bindkey '^[[1;3D' backward-word # tmux ubuntu
+bindkey '^[^H' delete-word
+bindkey '^[[1;9C' forward-word # iterm
+bindkey '^[^[[C' forward-word # tmux os x
+bindkey '^[[1;3C' forward-word # tmux ubuntu
+bindkey '^H' delete-word # iterm
+bindkey '^[[3~' delete-char # tmux
+
 # centralized history for multiple instances
 HISTFILE=~/.zhistory
 HISTSIZE=SAVEHIST=10000
