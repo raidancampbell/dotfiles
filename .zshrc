@@ -57,12 +57,13 @@ alias lsa='ls -AlhF'
 alias clsa='clear && ls -AlhF'
 alias alsa='ls -AlhF' # for all those times I hit enter before finishing the `lsa` alias
 alias internet='ping -c 4 www.google.com'
-alias used='du -h -s .'
+alias used='du -ch -d 1'
 alias left='df -h .'
 alias q='exit'
 alias count='wc -l' #e.g. lsa | count
 alias screena='screen -dRR -S aidan'
 alias tmuxa='tmux attach -t mainSession || tmux new'
+alias cl='clear'
 
 zstyle ':completion:*' completer _complete _ignored _approximate
 zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]}' 'r:|[._-]=* r:|=*' '' 'l:|=* r:|=*'
