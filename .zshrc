@@ -63,7 +63,9 @@ alias q='exit'
 alias count='wc -l' #e.g. lsa | count
 alias screena='screen -dRR -S aidan'
 alias tmuxa='tmux attach -t mainSession || tmux new'
+alias c='clear'
 alias cl='clear'
+alias cls='clear' # ugh, windows habits.
 
 zstyle ':completion:*' completer _complete _ignored _approximate
 zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]}' 'r:|[._-]=* r:|=*' '' 'l:|=* r:|=*'
