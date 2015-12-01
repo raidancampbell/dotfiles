@@ -2,7 +2,7 @@ source ~/.zsh/antigen/antigen.zsh
 antigen use oh-my-zsh
 antigen bundle autojump		# sourced in functions.zsh for OSX only --you need to both bundle and source it.
 antigen bundle zsh-users/zsh-syntax-highlighting
-antigen bundle colored-man
+antigen bundle colored-man-pages
 antigen bundle colorize
 antigen bundle screen
 antigen bundle brew		# TODO: only bundle this on darwin systems
