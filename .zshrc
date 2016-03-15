@@ -14,8 +14,12 @@ antigen apply
 # source me some functions
 source ~/.zsh/functions.zsh
 
-# source the personal aliases, containing hostnames and whatnot
-source ~/.zsh/personal.zsh
+# source the personal aliases, containing hostnames and whatnot, only if it exists
+if [[ -f ~/.zsh/personal.zsh ]]; then
+	source ~/.zsh/personal.zsh
+else
+fi
+
 
 # thanks https://github.com/solnic/dotfiles/blob/master/home/zsh/key-bindings.zsh
 bindkey -e
