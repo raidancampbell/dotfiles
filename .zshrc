@@ -16,9 +16,12 @@ antigen bundle colored-man-pages
 antigen bundle colorize
 [[ $OPERATING_SYSTEM == $OSX ]] && antigen bundle brew
 antigen bundle compleat
+antigen apply
+
+# theme it. I pulled this from the repo for portability
+source ~/.zsh/bira.zsh-theme
 antigen theme bira
 export LANG=en_US.UTF-8		# the bira theme's $PS1 causes issues solved by setting this.
-antigen apply
 
 # source me some functions
 source ~/.zsh/functions.zsh
