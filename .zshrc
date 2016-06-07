@@ -33,6 +33,8 @@ else
 fi
 
 # thanks https://github.com/solnic/dotfiles/blob/master/home/zsh/key-bindings.zsh
+# for future reference, to find the control characters received by a terminal emulator:
+	# printf '\033[?1000h' ; cat -ute
 bindkey -e
 bindkey '^[[1;9D' backward-word # iterm
 bindkey '^[^[[D' backward-word # tmux os x
