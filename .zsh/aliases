@@ -1,0 +1,31 @@
+alias untar='tar xzfv'
+alias lsa='ls -AlhF'
+alias clsa='clear && ls -AlhF'
+alias alsa='ls -AlhF'
+alias internet='ping -c4 www.google.com'
+alias used='du -ch -d 1'
+alias left='df -h .'
+alias q='exit'
+alias c='clear'
+alias cl='clear'
+alias cls='clear'
+alias mc='mc -x' # use xterm-mode, to allow mouse support even in a tmux session
+alias dkp='cd ~/Desktop'
+alias mirror="wget -e robots=off -m -r -np"
+alias findwifi='sudo wash -i en0'
+alias crackwifi='sudo reaver -i en0 -vv -b'
+alias count='wc -l' #e.g. lsa | count
+alias screena='screen -dRR -S aidan'
+alias tmuxa='tmux attach -t mainSession || tmux new'
+
+if [[ $OPERATING_SYSTEM == $CHROMEOS ]]; then
+        alias sublime='sudo enter-chroot -n sana xiwi /home/aidan/Downloads/devel/Sublime\ Text\ 2/sublime_text'
+        alias firefox='sudo enter-chroot -n sana xiwi iceweasel'
+        alias enter-sana='sudo enter-chroot -n sana'
+        alias enter-trusty='sudo enter-chroot -n trusty'
+        alias enter-kali='sudo enter-chroot -n kali'
+        alias trustyx='sudo enter-chroot -n trusty startxfce4'
+        alias sanax='sudo enter-chroot -n sana startxfce4'
+        alias playgames='sudo enter-chroot -n games startxfce4'
+else
+fi
