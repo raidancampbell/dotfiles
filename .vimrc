@@ -1,7 +1,8 @@
 " turn vim into nano
 
-" start in insert mode
-:startinsert
+" somewhere between OSX, iTerm, tmux, and zsh, these bindings got screwy
+imap <Esc>f <A-Right>
+imap <Esc>b <A-Left>
 
 map <C-O> <Esc>:w<CR>
 imap <C-O> <Esc>:w<CR>
@@ -16,7 +17,20 @@ imap <C-U> <Esc>p<Esc>i
 
 " TODO:
 "	bind word-skips to M-Left and M-Right
+
+imap <A-Left> <Esc>Bi
+imap <A-Right> <Esc>EEi  " esc kicks back one column, so we need to counteract this
+
 "	figure out how to enable cursor line wrapping
+
+set whichwrap+=[,]
+
 "	bind ctrl-v to pagedown, and ctrl-y to pageup
-"	figure out how to specify a filename
+
+"	figure out howto specify a filename
+
 "	remove literally every other feature
+
+"	start in insert mode
+
+:startinsert
