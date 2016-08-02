@@ -31,6 +31,15 @@ ex() {
     fi
 }
 
+fix_perl_complaining_about_encoding() {
+	if cat /etc/locale.gen | egrep -v "^#" | grep -q "en_US.UTF-8"; then
+		echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
+	else
+		echo The fix is already in place.  Rebuilding anyways...
+	fi
+	locale-gen
+}
+
 # -------------------------------------------------------------------
 # Mac specific functions
 # -------------------------------------------------------------------
@@ -38,23 +47,31 @@ if [[ $IS_MAC -eq 1 ]]; then
     # view man pages in Preview
     pman() { ps=`mktemp -t manpageXXXX`.ps ; man -t $@ > "$ps" ; open "$ps" ; }
 
-    # function to show interface IP assignments
-    ips() { foo=`/Users/mark/bin/getip.py; /Users/mark/bin/getip.py en0; /Users/mark/bin/getip.py en1`; echo $foo; } 
-
-    # notify function - http://hints.macworld.com/article.php?story=20120831112030251
-    notify() { automator -D title=$1 -D subtitle=$2 -D message=$3 ~/Library/Workflows/DisplayNotification.wflow }
-
     # fix stubborn UI issues by stabbing it with a fork
     alias fix='killall Dock'
 
     # handy dandy built in serial port reader
     alias serial='screen /dev/cu.usbserial-A402EXEV 115200 -L'
 
+function proxyon() {
+    _PROXY_USER=user
+    _PROXY_SERVER=server
+	networksetup -setsocksfirewallproxy "Wi-Fi" localhost 4040
+	networksetup -setsocksfirewallproxystate "Wi-Fi" on
+	ssh -D 4040 $_PROXY_USER@$_PROXY_SERVER
+}
+
+function proxyoff() {
+    echo Do not forget to close the SSH session!
+	networksetup -setsocksfirewallproxystate "Wi-Fi" off
+}
+
+
     # OSX-specific PATH updates
     export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-    export PATH=${PATH}:/usr/local/sbin # for iftop
-    export PATH="$PATH:/Applications/Phone Flash Tool Lite.app/Contents/MacOS" # for the intel edison
-
+    export PATH="$PATH:/usr/local/sbin" # for iftop
+    export PATH="$PATH:$HOME/nacl_sdk/pepper_49" # for NaCl development
+    export NACL_SDK_ROOT="$HOME/nacl_sdk/pepper_49"
 fi
 
 # -------------------------------------------------------------------
@@ -67,11 +84,3 @@ function myip() {
   ifconfig en1 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "en1 (IPv4): " $2 " " $3 " " $4 " " $5 " " $6}'
   ifconfig en1 | grep 'inet6 ' | sed -e 's/ / /' | awk '{print "en1 (IPv6): " $2 " " $3 " " $4 " " $5 " " $6}'
 }
-
-# -------------------------------------------------------------------
-# (s)ave or (i)nsert a directory.
-# -------------------------------------------------------------------
-s() { pwd > ~/.save_dir ; }
-i() { cd "$(cat ~/.save_dir)" ; }
-
-
