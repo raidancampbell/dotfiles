@@ -1,0 +1,385 @@
+servers = (
+  {
+    address = "irc.case.edu";
+    chatnet = "CWRU";
+    use_ssl = "yes";
+    port = "7778";
+    autoconnect = "yes";
+  },
+
+  {
+    address = "hacsoc.irc.slack.com";
+    chatnet = "Slack";
+    port = "8000";
+    use_ssl = "yes";
+    autoconnect = "yes";
+    password = "REDACTED";
+  },
+
+  { address = "irc.efnet.org"; chatnet = "EFNet"; port = "6667"; },
+  { address = "irc.esper.net"; chatnet = "EsperNet"; port = "6667"; },
+  {
+    address = "chat.freenode.net";
+    chatnet = "Freenode";
+    port = "6697";
+    use_ssl = "yes";
+    autoconnect = "yes";
+  },
+  { address = "open.ircnet.net"; chatnet = "IRCnet"; port = "6667"; },
+  {
+    address = "localhost";
+    chatnet = "bitlbee";
+    port = "6667";
+    use_ssl = "no";
+    ssl_verify = "no";
+    autoconnect = "yes";
+  }
+);
+
+chatnets = {
+  CWRU = {
+    type = "IRC";
+    nick = "raidan";
+    user_name = "raidan";
+    real_name = "raidan";
+  };
+  Slack = {
+    type = "IRC";
+    nick = "aidan";
+    user_name = "aidan";
+    real_name = "aidan";
+  };
+  EFNet = { 
+    type = "IRC";
+    max_kicks = "1";
+    max_msgs = "4";
+    max_whois = "1";
+  };
+  EsperNet = {
+    type = "IRC";
+    max_kicks = "1";
+    max_msgs = "4";
+    max_whois = "1";
+  };
+  Freenode = {
+    type = "IRC";
+    nick = "raidan";
+    user_name = "raidan";
+    real_name = "raidan";
+    max_kicks = "1";
+    max_msgs = "4";
+    max_whois = "1";
+  };
+  IRCnet = { 
+    type = "IRC";
+    max_kicks = "1";
+    max_msgs = "1";
+    max_whois = "1";
+  };
+  bitlbee = { type = "IRC"; };
+};
+
+channels = (
+  {
+    name = "#cwru";
+    chatnet = "CWRU";
+    autojoin = "Yes";
+    autosendcmd = "/msg nickserv IDENTIFY REDACTED";
+  },
+
+  { name = "#server"; chatnet = "Slack"; autojoin = "Yes"; },
+  { name = "#moonlight-chrome"; chatnet = "Slack"; autojoin = "Yes"; },
+
+  { name = "#DataHoarder"; chatnet = "Freenode"; autojoin = "Yes"; },
+
+  {
+    name = "&bitlbee";
+    chatnet = "bitlbee";
+    autojoin = "yes";
+    autosendcmd = "/msg nickserv identify REDACTED";
+  }
+);
+
+aliases = {
+  Q = "QUIT";
+  C = "CLEAR";
+  HL = "HILIGHT";
+  DHL = "DEHILIGHT";
+  EXIT = "QUIT";
+  J = "JOIN";
+  M = "QUERY";
+  P = "PART";
+  WI = "WHOIS";
+  WW = "WHOWAS";
+  WC = "WINDOW CLOSE";
+  1 = "WINDOW GOTO 1";
+  2 = "WINDOW GOTO 2";
+  3 = "WINDOW GOTO 3";
+  4 = "WINDOW GOTO 4";
+  5 = "WINDOW GOTO 5";
+  6 = "WINDOW GOTO 6";
+  7 = "WINDOW GOTO 7";
+  8 = "WINDOW GOTO 8";
+  9 = "WINDOW GOTO 9";
+  10 = "WINDOW GOTO 10";
+  11 = "WINDOW GOTO 11";
+  12 = "WINDOW GOTO 12";
+  13 = "WINDOW GOTO 13";
+  14 = "WINDOW GOTO 14";
+  15 = "WINDOW GOTO 15";
+  16 = "WINDOW GOTO 16";
+  17 = "WINDOW GOTO 17";
+  18 = "WINDOW GOTO 18";
+  19 = "WINDOW GOTO 19";
+  20 = "WINDOW GOTO 20";
+  MOUSE = "SET awl_mouse toggle";
+};
+
+statusbar = {
+
+  items = {
+
+    barstart = "{sbstart}";
+    barend = "{sbend}";
+
+    topicbarstart = "{topicsbstart}";
+    topicbarend = "{topicsbend}";
+
+    time = "{sb $Z}";
+    user = "{sb {sbnickmode $cumode}$N{sbmode $usermode}{sbaway $A}}";
+
+    window = "{sb $winref:$tag/$itemname{sbmode $M}}";
+    window_empty = "{sb $winref{sbservertag $tag}}";
+
+    prompt = "{prompt $[.15]itemname}";
+    prompt_empty = "{prompt $winname}";
+
+    topic = " $topic";
+    topic_empty = " Irssi v$J - http://www.irssi.org";
+
+    lag = "{sb Lag: $0-}";
+    act = "{sb Act: $0-}";
+    more = "-- more --";
+  };
+
+  default = {
+
+    window = {
+
+      disabled = "no";
+      type = "window";
+      placement = "bottom";
+      position = "1";
+      visible = "active";
+
+      items = {
+        barstart = { priority = "100"; };
+        window = { };
+        window_empty = { };
+        lag = { priority = "-1"; };
+        more = { priority = "-1"; alignment = "right"; };
+        barend = { priority = "100"; alignment = "right"; };
+        act = { };
+      };
+    };
+
+    window_inact = {
+
+      type = "window";
+      placement = "bottom";
+      position = "1";
+      visible = "inactive";
+
+      items = {
+        barstart = { priority = "100"; };
+        window = { };
+        window_empty = { };
+        more = { priority = "-1"; alignment = "right"; };
+        barend = { priority = "100"; alignment = "right"; };
+      };
+    };
+
+    prompt = {
+
+      type = "root";
+      placement = "bottom";
+      position = "100";
+      visible = "always";
+
+      items = {
+        prompt = { priority = "-1"; };
+        prompt_empty = { priority = "-1"; };
+        input = { priority = "10"; };
+      };
+    };
+
+    topic = {
+
+      type = "root";
+      placement = "top";
+      position = "1";
+      visible = "always";
+
+      items = {
+        topicbarstart = { priority = "100"; };
+        topic = { };
+        topic_empty = { };
+        topicbarend = { priority = "100"; alignment = "right"; };
+      };
+    };
+    awl_0 = {
+      items = {
+        barstart = { priority = "100"; };
+        awl_0 = { };
+        barend = { priority = "100"; alignment = "right"; };
+      };
+    };
+    awl_1 = {
+      items = {
+        barstart = { priority = "100"; };
+        awl_1 = { };
+        barend = { priority = "100"; alignment = "right"; };
+      };
+    };
+  };
+};
+settings = {
+  core = {
+    real_name = "raidan";
+    user_name = "raidan";
+    nick = "root";
+    hostname = "srs.business";
+    timestamp_format = "%H:%M:%S";
+  };
+  "fe-text" = { actlist_sort = "refnum"; scrollback_lines = "2000"; };
+  "irc/core" = { usermode = ""; };
+  "fe-common/core" = {
+    hide_colors = "no";
+    autolog = "yes";
+    beep_msg_level = "MSGS HILIGHT";
+    beep_when_window_active = "yes";
+    bell_beeps = "yes";
+  };
+  "perl/core/scripts" = {
+    nickcolor_colors = "2 3 4 5 6 7 9 10 11 12 13";
+    awl_shared_sbar = "OFF";
+    awl_viewer = "no";
+    trackbar_timestamp = "yes";
+    awl_block = "10";
+    awl_mouse = "no";
+  };
+};
+ignores = ( { level = "JOINS PARTS QUITS"; } );
+keyboard = (
+  { key = "^[[1;5D"; id = "previous_window"; data = ""; },
+  { key = "^[[1;5C"; id = "next_window"; data = ""; },
+  { key = "^[[1;5A"; id = "scroll_backward"; data = ""; },
+  { key = "^[[1;5B"; id = "scroll_forward"; data = ""; },
+  { key = "cleft"; id = "previous_window"; data = ""; },
+  { key = "cright"; id = "next_window"; data = ""; },
+  { key = "^C"; id = "erase_line"; data = ""; }
+);
+logs = { };
+hilights = (
+  { text = "aidan"; nick = "yes"; word = "yes"; },
+  { text = "raidan"; nick = "yes"; word = "yes"; },
+  { text = "free food"; nick = "yes"; word = "yes"; }
+);
+windows = {
+  1 = { immortal = "yes"; name = "S"; level = "ALL"; };
+  2 = { name = "hilight"; sticky = "yes"; };
+  3 = {
+    items = (
+      {
+        type = "CHANNEL";
+        chat_type = "IRC";
+        name = "#cwru";
+        tag = "CWRU";
+      }
+    );
+  };
+  5 = {
+    items = (
+      {
+        type = "CHANNEL";
+        chat_type = "IRC";
+        name = "&bitlbee";
+        tag = "bitlbee";
+      }
+    );
+  };
+  6 = {
+    items = (
+      {
+        type = "CHANNEL";
+        chat_type = "IRC";
+        name = "#twitter_raidancampbell";
+        tag = "bitlbee";
+      }
+    );
+  };
+  9 = {
+    items = (
+      {
+        type = "CHANNEL";
+        chat_type = "IRC";
+        name = "#server";
+        tag = "Slack";
+      }
+    );
+  };
+  10 = {
+    items = (
+      {
+        type = "CHANNEL";
+        chat_type = "IRC";
+        name = "#moonlight-chrome";
+        tag = "Slack";
+      }
+    );
+  };
+  11 = {
+    items = (
+      {
+        type = "CHANNEL";
+        chat_type = "IRC";
+        name = "#linkstate";
+        tag = "Slack";
+      }
+    );
+  };
+  12 = {
+    items = (
+      {
+        type = "CHANNEL";
+        chat_type = "IRC";
+        name = "#random";
+        tag = "Slack";
+      }
+    );
+  };
+  13 = {
+    items = (
+      {
+        type = "CHANNEL";
+        chat_type = "IRC";
+        name = "#general";
+        tag = "Slack";
+      }
+    );
+  };
+  14 = {
+    items = (
+      {
+        type = "CHANNEL";
+        chat_type = "IRC";
+        name = "#DataHoarder";
+        tag = "Freenode";
+      }
+    );
+  };
+};
+mainwindows = {
+  6 = { first_line = "7"; lines = "41"; };
+  2 = { first_line = "1"; lines = "6"; };
+};
