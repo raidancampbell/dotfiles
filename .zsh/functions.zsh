@@ -1,8 +1,3 @@
-if [[ $(uname) = 'Darwin' ]]; then
-    IS_MAC=1
-fi
-
-
 # -------------------------------------------------------------------
 # compressed file expander 
 # (from https://github.com/myfreeweb/zshuery/blob/master/zshuery.sh)
@@ -43,8 +38,8 @@ fix_perl_complaining_about_encoding() {
 # -------------------------------------------------------------------
 # Mac specific functions
 # -------------------------------------------------------------------
-if [[ $IS_MAC -eq 1 ]]; then
-    # view man pages in Preview
+if [ OPERATING_SYSTEM = $MAC ]; then
+    # view man pages in Previewi
     pman() { ps=`mktemp -t manpageXXXX`.ps ; man -t $@ > "$ps" ; open "$ps" ; }
 
     # fix stubborn UI issues by stabbing it with a fork
@@ -73,14 +68,3 @@ function proxyoff() {
     export PATH="$PATH:$HOME/nacl_sdk/pepper_49" # for NaCl development
     export NACL_SDK_ROOT="$HOME/nacl_sdk/pepper_49"
 fi
-
-# -------------------------------------------------------------------
-# myIP address
-# -------------------------------------------------------------------
-function myip() {
-  ifconfig lo0 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "lo0       : " $2}'
-  ifconfig en0 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "en0 (IPv4): " $2 " " $3 " " $4 " " $5 " " $6}'
-  ifconfig en0 | grep 'inet6 ' | sed -e 's/ / /' | awk '{print "en0 (IPv6): " $2 " " $3 " " $4 " " $5 " " $6}'
-  ifconfig en1 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "en1 (IPv4): " $2 " " $3 " " $4 " " $5 " " $6}'
-  ifconfig en1 | grep 'inet6 ' | sed -e 's/ / /' | awk '{print "en1 (IPv6): " $2 " " $3 " " $4 " " $5 " " $6}'
-}
