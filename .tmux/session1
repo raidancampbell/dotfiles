@@ -1,3 +1,0 @@
-new  -s mainSession -n mainWindow #echo main
-neww -n secondWindow
-
