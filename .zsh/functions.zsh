@@ -38,7 +38,7 @@ fix_perl_complaining_about_encoding() {
 # -------------------------------------------------------------------
 # Mac specific functions
 # -------------------------------------------------------------------
-if [[ OPERATING_SYSTEM = $MAC ]]; then
+if [[ $OPERATING_SYSTEM = $OSX ]]; then
     # view man pages in Previewi
     pman() { ps=`mktemp -t manpageXXXX`.ps ; man -t $@ > "$ps" ; open "$ps" ; }
 
