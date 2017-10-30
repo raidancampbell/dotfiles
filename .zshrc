@@ -74,3 +74,6 @@ zstyle :compinstall filename '/Users/aidan/.zshrc'
 autoload -Uz compinit
 compinit
 # End of lines added by compinstall
+
+# according to the docs, this must be last
+source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
