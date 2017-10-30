@@ -21,22 +21,46 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+setopt PROMPT_SUBST
+autoload -U colors && colors
+function git_prompt_info() {
+  local ref
+  if [[ "$(command git config --get oh-my-zsh.hide-status 2>/dev/null)" != "1" ]]; then
+    ref=$(command git symbolic-ref HEAD 2> /dev/null) || \
+    ref=$(command git rev-parse --short HEAD 2> /dev/null) || return 0
+    echo "$ZSH_THEME_GIT_PROMPT_PREFIX${ref#refs/heads/}$(parse_git_dirty)$ZSH_THEME_GIT_PROMPT_SUFFIX"
+  fi
+}
+
+# Checks if working tree is dirty
+function parse_git_dirty() {
+  local STATUS=''
+  local FLAGS
+  FLAGS=('--porcelain')
+  if [[ "$(command git config --get oh-my-zsh.hide-dirty)" != "1" ]]; then
+    if [[ $POST_1_7_2_GIT -gt 0 ]]; then
+      FLAGS+='--ignore-submodules=dirty'
+    fi
+    if [[ "$DISABLE_UNTRACKED_FILES_DIRTY" == "true" ]]; then
+      FLAGS+='--untracked-files=no'
+    fi
+    STATUS=$(command git status ${FLAGS} 2> /dev/null | tail -n1)
+  fi
+  if [[ -n $STATUS ]]; then
+    echo "$ZSH_THEME_GIT_PROMPT_DIRTY"
+  else
+    echo "$ZSH_THEME_GIT_PROMPT_CLEAN"
+  fi
+}
 
 local return_code="%(?..%{$fg[red]%}%? ↵%{$reset_color%})"
 
 local user_host='%{$terminfo[bold]$fg[green]%}%n@%m%{$reset_color%}'
 local current_dir='%{$terminfo[bold]$fg[blue]%} %~%{$reset_color%}'
-local rvm_ruby=''
-if which rvm-prompt &> /dev/null; then
-  rvm_ruby='%{$fg[red]%}‹$(rvm-prompt i v g)›%{$reset_color%}'
-else
-  if which rbenv &> /dev/null; then
-    rvm_ruby='%{$fg[red]%}‹$(rbenv version | sed -e "s/ (set.*$//")›%{$reset_color%}'
-  fi
-fi
+
 local git_branch='$(git_prompt_info)%{$reset_color%}'
 
-PROMPT="╭─${user_host} ${current_dir} ${rvm_ruby} ${git_branch}
+PROMPT="╭─${user_host} ${current_dir} ${git_branch}
 ╰─%B$%b "
 RPS1="${return_code}"
 
