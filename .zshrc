@@ -11,9 +11,6 @@ source ~/.zsh/os_definitions
 
 source ~/.zsh/antigen/antigen.zsh
 antigen use oh-my-zsh
-antigen bundle colored-man-pages
-antigen bundle colorize
-[[ $OPERATING_SYSTEM == $OSX ]] && antigen bundle brew
 antigen bundle compleat
 antigen apply
 
