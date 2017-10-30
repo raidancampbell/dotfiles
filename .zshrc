@@ -11,7 +11,6 @@ source ~/.zsh/os_definitions
 
 source ~/.zsh/antigen/antigen.zsh
 antigen use oh-my-zsh
-antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle colored-man-pages
 antigen bundle colorize
 [[ $OPERATING_SYSTEM == $OSX ]] && antigen bundle brew
@@ -20,7 +19,6 @@ antigen apply
 
 # theme it. I pulled this from the repo for portability
 source ~/.zsh/bira.zsh-theme
-antigen theme bira
 export LANG=en_US.UTF-8		# the bira theme's $PS1 causes issues solved by setting this.
 
 # source me some functions
