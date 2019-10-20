@@ -12,6 +12,7 @@ source ~/.zsh/os_definitions
 source ~/.zsh/antigen/antigen.zsh
 antigen use oh-my-zsh
 antigen bundle compleat
+antigen bundle zsh-users/zsh-syntax-highlighting
 antigen apply
 
 # theme it. I pulled this from the repo for portability
@@ -29,12 +30,14 @@ fi
 
 # thanks https://github.com/solnic/dotfiles/blob/master/home/zsh/key-bindings.zsh
 # for future reference, to find the control characters received by a terminal emulator:
-	# printf '\033[?1000h' ; cat -ute
+# printf '\033[?1000h' ; cat -ute
 bindkey -e
+bindkey "\e\eOD" backward-word # jetbrains
 bindkey '^[[1;9D' backward-word # iterm
 bindkey '^[^[[D' backward-word # tmux os x
 bindkey '^[[1;3D' backward-word # tmux ubuntu
 bindkey '^[^H' delete-word
+bindkey "\e\eOC" forward-word # jetbrains
 bindkey '^[[1;9C' forward-word # iterm
 bindkey '^[^[[C' forward-word # tmux os x
 bindkey '^[[1;3C' forward-word # tmux ubuntu
@@ -52,23 +55,30 @@ setopt NO_BEEP #gotta be nice to the people who host the box remotely
 setopt menu_complete
 
 # what's this command doing if it takes > 10 seconds?
+TIMEFMT="%J  %U user %S system %P cpu %*E total, finished $(date)"
 REPORTTIME=10
 
 # variables and plugins
 export VISUAL='nano' # I transcend the vim/emacs war.
 export EDITOR=$VISUAL
 
+FZF_DEFAULT_OPTS="--height=50% --min-height=15 --reverse"
+
+if which direnv >/dev/null 2>&1 ; then
+    eval "$(direnv hook zsh)"
+fi
+
+
 # aliases
 source ~/.zsh/aliases
+
+export PATH="/usr/local/opt/ruby/bin:$PATH"
+export PATH="$PATH:/Users/aidan/go/bin"
+export PATH="/usr/local/opt/libpcap/bin:$PATH"
 
 zstyle ':completion:*' completer _complete _ignored _approximate
 zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]}' 'r:|[._-]=* r:|=*' '' 'l:|=* r:|=*'
 zstyle ':completion:*' max-errors 2
 zstyle :compinstall filename '/Users/aidan/.zshrc'
 
-autoload -Uz compinit
-compinit
-# End of lines added by compinstall
-
-# according to the docs, this must be last
-source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+autoload -Uz compinit && compinit
