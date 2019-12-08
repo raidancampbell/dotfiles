@@ -5,6 +5,7 @@ alias alsa='ls -AlhF'
 alias internet='ping -c4 www.google.com'
 alias used='du -ch -d 1'
 alias left='df -h .'
+alias po='popd'  # from auto_pushd opt
 alias q='exit'
 alias c='clear'
 alias cl='clear'
@@ -27,5 +28,10 @@ if [[ $OPERATING_SYSTEM == $CHROMEOS ]]; then
         alias trustyx='sudo enter-chroot -n trusty startxfce4'
         alias sanax='sudo enter-chroot -n sana startxfce4'
         alias playgames='sudo enter-chroot -n games startxfce4'
+else
+fi
+
+if [[ $OPERATING_SYSTEM == $OSX ]]; then
+	alias s='open -a /Applications/Sublime\ Text.app'
 else
 fi
