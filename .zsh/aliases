@@ -31,7 +31,7 @@ if [[ $OPERATING_SYSTEM == $CHROMEOS ]]; then
 else
 fi
 
+
 if [[ $OPERATING_SYSTEM == $OSX ]]; then
-	alias s='open -a /Applications/Sublime\ Text.app'
-else
+        alias s='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl'
 fi
