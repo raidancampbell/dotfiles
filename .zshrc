@@ -46,7 +46,7 @@ bindkey '^[[3~' delete-char # tmux
 
 # centralized history for multiple instances
 HISTFILE=~/.zhistory
-HISTSIZE=SAVEHIST=10000
+HISTSIZE=SAVEHIST=1000000
 setopt sharehistory extendedhistory
 
 # instead of "'x' is a directory", it now cd's to 'x'
