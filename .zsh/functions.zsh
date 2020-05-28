@@ -84,3 +84,19 @@ function proxyoff() {
     export PATH="$PATH:$HOME/nacl_sdk/pepper_49" # for NaCl development
     export NACL_SDK_ROOT="$HOME/nacl_sdk/pepper_49"
 fi
+
+
+# find in file
+fif() {
+	if [ ! "$#" -gt 0 ]; then
+		echo "Search string required"
+		return 1
+	fi
+
+	rg --files-with-matches --no-messages "$1" | fzf --preview "highlight -O ansi -l {} 2> /dev/null | rg --colors 'match:bg:yellow' --ignore-case --pretty --context 10 '$1' || rg --ignore-case --pretty --context 10 '$1' {}"
+}
+
+# find in file, but open in sublime
+sfif() {
+	/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl $(fif "$@")
+}
