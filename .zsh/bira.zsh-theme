@@ -66,3 +66,31 @@ RPS1="${return_code}"
 
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[yellow]%}‹"
 ZSH_THEME_GIT_PROMPT_SUFFIX="› %{$reset_color%}"
+
+strlen() {
+    FOO=$1
+    local invisible='%([BSUbfksu]|([FB]|){*})'
+    LEN=${#${(S%%)FOO//$~zero/}}
+    echo $LEN
+}
+
+# show right prompt with date in yellow ONLY when command is executed
+preexec() {
+	YELL='\033[0;33m'
+	NC='\033[0m' # no color
+	DATE=$( date +"[%H:%M:%S]")
+	local len_right=$( strlen "$DATE")
+	len_right=$(( $len_right+1 ))
+	local right_start=$(($COLUMNS - $len_right))
+	local len_cmd=$( strlen "$@" )
+	local len_prompt=$( strlen "$PROMP" )
+	local len_left=$(( $len_cmd + $len_prompt ))
+	RDATE="\033[${right_start}C ${DATE}"
+	if [ $len_left -lt $right_start ]; then  # newline
+		echo -e "${YELL}\033[1A${RDATE}${NC}"
+	else
+		echo -e "${YELL}${RDATE}${NC}"
+	fi
+}
+# else show the right prompt in green
+RPROMPT='%{$fg[green]%}[%D{%H:%M:%S}]'
