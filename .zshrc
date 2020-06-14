@@ -4,7 +4,7 @@ if [[ $- != *i* ]] ; then
 fi
 
 # figure out which operating system we're on
-source ~/.zsh/os_definitions
+source ~/.zsh/os_definitions.sh
 
 # Thanks, El Capitan for weird permissions.
 [[ $OPERATING_SYSTEM == $OSX ]] && export PATH=/usr/local/bin:$PATH
@@ -70,11 +70,13 @@ fi
 
 
 # aliases
-source ~/.zsh/aliases
+source ~/.zsh/aliases.sh
 
+export GOPROXY=https://proxy.golang.org 
 export PATH="/usr/local/opt/ruby/bin:$PATH"
 export PATH="$PATH:/Users/aidan/go/bin"
 export PATH="/usr/local/opt/libpcap/bin:$PATH"
+eval "$(rbenv init -)"
 
 zstyle ':completion:*' completer _complete _ignored _approximate
 zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]}' 'r:|[._-]=* r:|=*' '' 'l:|=* r:|=*'

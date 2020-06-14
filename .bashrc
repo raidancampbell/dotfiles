@@ -3,7 +3,7 @@ if [[ $- != *i* ]] ; then
         return
 fi
 
-source ~/.zsh/os_definitions
+source ~/.zsh/os_definitions.sh
 
 if [[ $OPERATING_SYSTEM == $CHROMEOS ]]; then
 	export prefix=/usr/local/linuxbrew # wherever you want linuxbrew, but it better be somewhere in /usr/local
@@ -19,7 +19,7 @@ fi
 
 export LANG=en_US.UTF-8
 
-source ~/.zsh/aliases
+source ~/.zsh/aliases.sh
 
 shopt -s histappend
 shopt -s autocd
