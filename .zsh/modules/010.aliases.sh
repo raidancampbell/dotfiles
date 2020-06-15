@@ -15,7 +15,3 @@ alias dkp='cd ~/Desktop'
 alias mirror="wget -e robots=off -m -r -np"
 alias count='wc -l' #e.g. lsa | count
 alias screena='screen -dRR -S aidan'
-
-if [ -f /Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl ]; then
-        alias s='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl'
-fi

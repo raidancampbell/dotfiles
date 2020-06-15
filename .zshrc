@@ -3,30 +3,11 @@ if [[ $- != *i* ]] ; then
         return
 fi
 
-# figure out which operating system we're on
-source ~/.zsh/os_definitions.sh
-
-# Thanks, El Capitan for weird permissions.
-[[ $OPERATING_SYSTEM == $OSX ]] && export PATH=/usr/local/bin:$PATH
-
-source ~/.zsh/antigen/antigen.zsh
-antigen use oh-my-zsh
-antigen bundle compleat
-antigen bundle zsh-users/zsh-syntax-highlighting
-antigen apply
-
-# theme it. I pulled this from the repo for portability
-source ~/.zsh/bira.zsh-theme
-export LANG=en_US.UTF-8		# the bira theme's $PS1 causes issues solved by setting this.
-
-# source me some functions
-source ~/.zsh/functions.zsh
+# everything in ~/.zsh/modules/
+source ~/.zsh/source_modular.sh
 
 # source the personal aliases, containing hostnames and whatnot, only if it exists
-if [[ -f ~/.zsh/personal.zsh ]]; then
-        source ~/.zsh/personal.zsh
-else
-fi
+[[ -f ~/.zsh/personal.zsh ]] && source ~/.zsh/personal.zsh
 
 # thanks https://github.com/solnic/dotfiles/blob/master/home/zsh/key-bindings.zsh
 # for future reference, to find the control characters received by a terminal emulator:
@@ -62,21 +43,15 @@ REPORTTIME=10
 export VISUAL='nano' # I transcend the vim/emacs war.
 export EDITOR=$VISUAL
 
-FZF_DEFAULT_OPTS="--height=50% --min-height=15 --reverse"
+source ~/.zsh/antigen/antigen.zsh
+antigen use oh-my-zsh
+antigen bundle compleat
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen apply
 
-if which direnv >/dev/null 2>&1 ; then
-    eval "$(direnv hook zsh)"
-fi
-
-
-# aliases
-source ~/.zsh/aliases.sh
-
-export GOPROXY=https://proxy.golang.org 
-export PATH="/usr/local/opt/ruby/bin:$PATH"
-export PATH="$PATH:/Users/aidan/go/bin"
-export PATH="/usr/local/opt/libpcap/bin:$PATH"
-eval "$(rbenv init -)"
+# theme it. I pulled this from the repo for portability
+source ~/.zsh/bira.zsh-theme
+export LANG=en_US.UTF-8		# the bira theme's $PS1 causes issues solved by setting this.
 
 zstyle ':completion:*' completer _complete _ignored _approximate
 zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]}' 'r:|[._-]=* r:|=*' '' 'l:|=* r:|=*'

@@ -15,7 +15,7 @@ man() {
 }
 
 # -------------------------------------------------------------------
-# compressed file expander 
+# compressed file expander
 # (from https://github.com/myfreeweb/zshuery/blob/master/zshuery.sh)
 # -------------------------------------------------------------------
 ex() {
@@ -49,52 +49,4 @@ fix_perl_complaining_about_encoding() {
 		echo The fix is already in place.  Rebuilding anyways...
 	fi
 	locale-gen
-}
-
-# -------------------------------------------------------------------
-# Mac specific functions
-# -------------------------------------------------------------------
-if [ "$OPERATING_SYSTEM" = "$OSX" ]; then
-    # view man pages in Previewi
-    pman() { ps=`mktemp -t manpageXXXX`.ps ; man -t $@ > "$ps" ; open "$ps" ; }
-
-    # fix stubborn UI issues by stabbing it with a fork
-    alias fix='killall Dock'
-
-    # handy dandy built in serial port reader
-    alias serial='screen /dev/cu.usbserial-A402EXEV 115200 -L'
-
-function proxyon() {
-    _PROXY_USER=user
-    _PROXY_SERVER=server
-	networksetup -setsocksfirewallproxy "Wi-Fi" localhost 4040
-	networksetup -setsocksfirewallproxystate "Wi-Fi" on
-	ssh -D 4040 $_PROXY_USER@$_PROXY_SERVER
-}
-
-function proxyoff() {
-    echo Do not forget to close the SSH session!
-	networksetup -setsocksfirewallproxystate "Wi-Fi" off
-}
-
-
-    # OSX-specific PATH updates
-    export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-    export PATH="$PATH:/usr/local/sbin" # for iftop
-fi
-
-
-# find in file
-fif() {
-    if [ ! "$#" -gt 0 ]; then
-        echo "Search string required"
-        return 1
-    fi
-    
-    rg --files-with-matches --no-messages "$1" | fzf --preview "highlight -O ansi -l {} 2> /dev/null | rg --colors 'match:bg:yellow' --ignore-case --pretty --context 10 '$1' || rg --ignore-case --pretty --context 10 '$1' {}"
-}
-
-# find in file, but open in sublime
-sfif() {
-    /Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl $(fif "$@")
 }
