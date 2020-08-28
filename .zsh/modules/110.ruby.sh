@@ -1,8 +1,10 @@
+# if no ruby, skip
 if [ -z "$(command -v ruby)" ] ; then
     return
 fi
 
-if [ -z "$(command -v rbenv)" ] ; then
+# if rbenv, then do the rbenv do
+if [ -n "$(command -v rbenv)" ] ; then
     eval "$(rbenv init -)"
 fi
 export PATH="/usr/local/opt/ruby/bin:$PATH"
