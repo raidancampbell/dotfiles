@@ -3,12 +3,6 @@ if [[ $- != *i* ]] ; then
         return
 fi
 
-# everything in ~/.zsh/modules/
-source ~/.zsh/source_modular.sh
-
-# source the personal aliases, containing hostnames and whatnot, only if it exists
-[[ -f ~/.zsh/personal.zsh ]] && source ~/.zsh/personal.zsh
-
 # thanks https://github.com/solnic/dotfiles/blob/master/home/zsh/key-bindings.zsh
 # for future reference, to find the control characters received by a terminal emulator:
 # printf '\033[?1000h' ; cat -ute
@@ -59,3 +53,9 @@ zstyle ':completion:*' max-errors 2
 zstyle :compinstall filename '/Users/aidan/.zshrc'
 
 autoload -Uz compinit && compinit
+
+# everything in ~/.zsh/modules/
+source ~/.zsh/source_modular.sh
+
+# source the personal aliases, containing hostnames and whatnot, only if it exists
+[[ -f ~/.zsh/personal.zsh ]] && source ~/.zsh/personal.zsh
