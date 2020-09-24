@@ -33,10 +33,6 @@ setopt menu_complete
 TIMEFMT="%J  %U user %S system %P cpu %*E total, finished $(date)"
 REPORTTIME=10
 
-# variables and plugins
-export VISUAL='nano' # I transcend the vim/emacs war.
-export EDITOR=$VISUAL
-
 source ~/.zsh/antigen/antigen.zsh
 antigen use oh-my-zsh
 antigen bundle compleat
@@ -45,7 +41,6 @@ antigen apply
 
 # theme it. I pulled this from the repo for portability
 source ~/.zsh/bira.zsh-theme
-export LANG=en_US.UTF-8		# the bira theme's $PS1 causes issues solved by setting this.
 
 zstyle ':completion:*' completer _complete _ignored _approximate
 zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]}' 'r:|[._-]=* r:|=*' '' 'l:|=* r:|=*'
