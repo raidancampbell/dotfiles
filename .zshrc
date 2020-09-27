@@ -35,8 +35,8 @@ REPORTTIME=10
 
 source ~/.zsh/antigen/antigen.zsh
 antigen use oh-my-zsh
-antigen bundle compleat
-antigen bundle zsh-users/zsh-syntax-highlighting
+#antigen bundle compleat
+# antigen bundle zsh-users/zsh-syntax-highlighting
 antigen apply
 
 # theme it. I pulled this from the repo for portability
@@ -45,7 +45,7 @@ source ~/.zsh/bira.zsh-theme
 zstyle ':completion:*' completer _complete _ignored _approximate
 zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]}' 'r:|[._-]=* r:|=*' '' 'l:|=* r:|=*'
 zstyle ':completion:*' max-errors 2
-zstyle :compinstall filename '/Users/aidan/.zshrc'
+zstyle :compinstall filename '$HOME/.zshrc'
 
 autoload -Uz compinit && compinit
 
