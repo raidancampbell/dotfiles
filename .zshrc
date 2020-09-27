@@ -35,9 +35,9 @@ TIMEFMT="%J  %U user %S system %P cpu %*E total, finished $(date)"
 REPORTTIME=10
 
 # TODO: extract git tab completion from antigen
-source ~/.zsh/antigen/antigen.zsh
+# source ~/.zsh/antigen/antigen.zsh
 # antigen use oh-my-zsh
-antigen apply
+# antigen apply
 
 # theme it. I pulled this from the repo for portability
 source ~/.zsh/bira.zsh-theme
