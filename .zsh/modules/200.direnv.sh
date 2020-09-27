@@ -2,4 +2,8 @@ if [ -z "$(command -v direnv)" ] ; then
     return
 fi
 
-eval "$(direnv hook zsh)"
+# if we're in zsh, then load
+if [ -n "$(echo $ZSH_NAME)" ]; then
+  eval "$(direnv hook zsh)"
+fi
+
