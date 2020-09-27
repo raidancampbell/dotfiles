@@ -15,3 +15,8 @@ alias dkp='cd ~/Desktop'
 alias mirror="wget -e robots=off -m -r -np"
 alias count='wc -l' #e.g. lsa | count
 alias screena='screen -dRR -S aidan'
+
+alias ...='../..'
+alias ....='../../..'
+alias .....='../../../..'
+alias ......='../../../../..'
