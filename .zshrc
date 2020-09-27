@@ -20,9 +20,10 @@ bindkey '^H' delete-word # iterm
 bindkey '^[[3~' delete-char # tmux
 
 # centralized history for multiple instances
+setopt share_history extended_history
 HISTFILE=~/.zhistory
 HISTSIZE=SAVEHIST=1000000
-setopt sharehistory extendedhistory
+setopt hist_expire_dups_first hist_ignore_space hist_verify
 
 # instead of "'x' is a directory", it now cd's to 'x'
 setopt auto_cd auto_pushd
@@ -35,8 +36,6 @@ REPORTTIME=10
 
 source ~/.zsh/antigen/antigen.zsh
 antigen use oh-my-zsh
-#antigen bundle compleat
-# antigen bundle zsh-users/zsh-syntax-highlighting
 antigen apply
 
 # theme it. I pulled this from the repo for portability
