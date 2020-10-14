@@ -2,44 +2,42 @@ if [ -z "${ZSH_NAME}" ]; then
   return
 fi
 
+autoload -Uz compinit && compinit
+
+# mine
+zstyle ':completion:*' completer _complete _ignored _approximate
+#zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]}' 'r:|[._-]=* r:|=*' '' 'l:|=* r:|=*'
+zstyle ':completion:*' max-errors 2
+zstyle ':completion:*' squeeze-slashes true # fo//ba is fo/ba not fo/*/ba
+zstyle ':completion:*' special-dirs .. #completion will show the .. special dir, but not the . dir
+zstyle ':completion:*:functions' ignored-patterns '_*' # don't suggest internal functions
+
+# when using SSH & otherss, suggest from the contents of ~/.ssh/known_hosts
+zstyle -e ':completion:*:(ssh|scp|sftp|rsh|rsync):hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}//,/ })'
+
 # taken from https://github.com/ohmyzsh/ohmyzsh/blob/master/lib/completion.zsh
 zmodload -i zsh/complist
 
 WORDCHARS='_-'
 
-unsetopt menu_complete   # do not autoselect the first completion entry
 unsetopt flowcontrol
-setopt auto_menu         # show completion menu on successive tab press
-setopt complete_in_word
-setopt always_to_end
+setopt auto_menu # show completion menu on successive tab press
+setopt complete_in_word # cursor at 'f' in 'Mafile' will suggest 'Makefile', not move to the next word
+setopt always_to_end # put the cursor on the end of the line after completion
 
 # should this be in keybindings?
 bindkey -M menuselect '^o' accept-and-infer-next-history
 zstyle ':completion:*:*:*:*:*' menu select
 
 # case insensitive (all), partial-word and substring completion
-if [[ "$CASE_SENSITIVE" = true ]]; then
-  zstyle ':completion:*' matcher-list 'r:|=*' 'l:|=* r:|=*'
-else
-  if [[ "$HYPHEN_INSENSITIVE" = true ]]; then
-    zstyle ':completion:*' matcher-list 'm:{a-zA-Z-_}={A-Za-z_-}' 'r:|=*' 'l:|=* r:|=*'
-  else
-    zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
-  fi
-fi
-unset CASE_SENSITIVE HYPHEN_INSENSITIVE
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
 
 # Complete . and .. special directories
 zstyle ':completion:*' special-dirs true
 
 zstyle ':completion:*' list-colors ''
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
-
-if [[ "$OSTYPE" = solaris* ]]; then
-  zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,user,comm"
-else
-  zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,user,comm -w -w"
-fi
+zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,user,comm -w -w"
 
 # disable named-directories autocompletion
 zstyle ':completion:*:cd:*' tag-order local-directories directory-stack path-directories
@@ -61,19 +59,6 @@ zstyle ':completion:*:*:*:users' ignored-patterns \
 
 # ... unless we really want to.
 zstyle '*' single-ignored show
-
-if [[ $COMPLETION_WAITING_DOTS = true ]]; then
-  expand-or-complete-with-dots() {
-    print -Pn "%F{red}…%f"
-    zle expand-or-complete
-    zle redisplay
-  }
-  zle -N expand-or-complete-with-dots
-  # Set the function as the default tab completion widget
-  bindkey -M emacs "^I" expand-or-complete-with-dots
-  bindkey -M viins "^I" expand-or-complete-with-dots
-  bindkey -M vicmd "^I" expand-or-complete-with-dots
-fi
 
 # automatically load bash completion functions
 autoload -U +X bashcompinit && bashcompinit

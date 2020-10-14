@@ -1,10 +1,28 @@
-# taken from: https://github.com/ohmyzsh/ohmyzsh/blob/master/lib/key-bindings.zsh
 # this only applies to ZSH
 if [ -z "${ZSH_NAME}" ]; then
   return
 fi
 
+# personal keybindings for consistent access across several terms
 
+# thanks https://github.com/solnic/dotfiles/blob/master/home/zsh/key-bindings.zsh
+# for future reference, to find the control characters received by a terminal emulator:
+# printf '\033[?1000h' ; cat -ute
+bindkey -e
+bindkey "\e\eOD" backward-word # jetbrains
+bindkey '^[[1;9D' backward-word # iterm
+bindkey '^[^[[D' backward-word # tmux os x
+bindkey '^[[1;3D' backward-word # tmux ubuntu
+bindkey '^[^H' delete-word
+bindkey "\e\eOC" forward-word # jetbrains
+bindkey '^[[1;9C' forward-word # iterm
+bindkey '^[^[[C' forward-word # tmux os x
+bindkey '^[[1;3C' forward-word # tmux ubuntu
+bindkey '^H' delete-word # iterm
+bindkey '^[[3~' delete-char # tmux
+
+
+# the below is all taken from: https://github.com/ohmyzsh/ohmyzsh/blob/master/lib/key-bindings.zsh
 # Make sure that the terminal is in application mode when zle is active, since
 # only then values from $terminfo are valid
 if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
