@@ -7,9 +7,6 @@ color yellow "^[0-9\.]+\s"
 # IPv6
 icolor green "^[0-9a-f:]+\s"
 
-# interpunction
-color normal "[.:]"
-
 # comments
 color brightblack "^#.*"
 
