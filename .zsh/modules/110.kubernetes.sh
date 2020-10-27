@@ -18,6 +18,24 @@ alias king='kubectl get ingress'
 #alias watchpo=''
 alias kcdebug='kubectl run -i --rm --tty $(whoami)-debug --image=alpine --restart=Never -- sh -c "apk --no-cache add curl ; sh" '
 
+# if krew isn't installed, expose a function for installing it
+if [ -z "$(command -v krew)" ]; then
+  function install_krew() {
+    (
+      set -x; cd "$(mktemp -d)" &&
+      curl -fsSLO "https://github.com/kubernetes-sigs/krew/releases/latest/download/krew.tar.gz" &&
+      tar zxvf krew.tar.gz &&
+      KREW=./krew-"$(uname | tr '[:upper:]' '[:lower:]')_$(uname -m | sed -e 's/x86_64/amd64/' -e 's/arm.*$/arm/')" &&
+      "$KREW" install krew
+    )
+  }
+else # it is installed, expose it on the path
+  # for future reference, list of plugins are available here: https://krew.sigs.k8s.io/plugins/
+  export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+  # consider installing these:
+  # kubectl krew install fuzzy rbac-lookup popeye tail
+fi
+
 # scrapes the raw metrics endpoint
 # flattens and ignores multiple containers per pod
 # converts resource usage from nanocores and kilobytes of memory into millicores and megabytes
