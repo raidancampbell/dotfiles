@@ -20,3 +20,7 @@ alias ...='../..'
 alias ....='../../..'
 alias .....='../../../..'
 alias ......='../../../../..'
+
+if [ -n "$(command -v fc)" ] ; then
+  alias history='fc -l 1'
+fi
