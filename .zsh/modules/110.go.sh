@@ -4,3 +4,4 @@ fi
 
 export GOPROXY=https://proxy.golang.org
 export PATH="$HOME/go/bin:$PATH"
+export GOPATH="~/go"
