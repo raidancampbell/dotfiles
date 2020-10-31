@@ -2,6 +2,7 @@
 LINKS=(
   .config/mc
   .config/nano
+  .config/alacritty.yml
   .irssi
   .zsh
   .bashrc
