@@ -6,6 +6,7 @@ LINKS=(
   .irssi
   .zsh
   .bashrc
+  .digrc
   .nanorc
   .profile
   .screenrc
