@@ -16,7 +16,7 @@ setopt menu_complete
 setopt interactive_comments
 
 # what's this command doing if it takes > 10 seconds?
-TIMEFMT="%J  %U user %S system %P cpu %*E total %MM memory, finished $(date)"
+TIMEFMT="%J  %U user %S system %P cpu %*E total %M KB memory"
 REPORTTIME=10
 
 # Here's the bones: source everything in ~/.zsh/modules/
