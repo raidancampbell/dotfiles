@@ -2,8 +2,6 @@ if [ -z "${ZSH_NAME}" ]; then
   return
 fi
 
-autoload -Uz compinit && compinit
-
 # mine
 zstyle ':completion:*' completer _complete _ignored _approximate
 #zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]}' 'r:|[._-]=* r:|=*' '' 'l:|=* r:|=*'

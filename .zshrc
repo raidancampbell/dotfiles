@@ -19,6 +19,9 @@ setopt interactive_comments
 TIMEFMT="%J  %U user %S system %P cpu %*E total %M KB memory"
 REPORTTIME=10
 
+# prep for completions to be loaded in modules
+autoload -Uz compinit && compinit
+
 # Here's the bones: source everything in ~/.zsh/modules/
 source ~/.zsh/source_modular.sh
 
