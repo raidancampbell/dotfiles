@@ -21,6 +21,7 @@ REPORTTIME=10
 
 # prep for completions to be loaded in modules
 autoload -Uz compinit && compinit
+autoload -U +X bashcompinit && bashcompinit
 
 # Here's the bones: source everything in ~/.zsh/modules/
 source ~/.zsh/source_modular.sh

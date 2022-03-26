@@ -57,6 +57,3 @@ zstyle ':completion:*:*:*:users' ignored-patterns \
 
 # ... unless we really want to.
 zstyle '*' single-ignored show
-
-# automatically load bash completion functions
-autoload -U +X bashcompinit && bashcompinit
