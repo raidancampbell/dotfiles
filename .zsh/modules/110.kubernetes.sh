@@ -3,32 +3,22 @@ if [ -z "$(command -v kubectl)" ]; then
 fi
 
 alias kc=kubectl
+
+# if the current shell is zsh, then source the zsh autocompletions
 if [ -n "$(echo $ZSH_NAME)" ]; then
-  source <(kubectl completion zsh)
+  # cache zsh autocompletions for 7 days: it's slow and doesn't change often anyways
+  # thanks, https://pickard.cc/posts/why-does-zsh-start-slowly/
+  cache_loc=~/.zsh/modules/assets/kubectl_completion_zsh.zsh
+  if [[ -f "$cache_loc" ]] && ! [[ $(find "$cache_loc" -mtime +7 -print) ]]; then
+  else
+    kubectl completion zsh > "$cache_loc"
+  fi
   compdef __start_kubectl kc
 fi
 
 alias king='kubectl get ingress'
-#alias watchpo=''
+alias watchpo='watch kubectl get po'
 alias kcdebug='kubectl run -i --rm --tty $(whoami)-debug --image=alpine --restart=Never -- sh -c "apk --no-cache add curl ; sh" '
-
-# if krew isn't installed, expose a function for installing it
-if [ -z "$(command -v krew)" ]; then
-  function install_krew() {
-    (
-      set -x; cd "$(mktemp -d)" &&
-      curl -fsSLO "https://github.com/kubernetes-sigs/krew/releases/latest/download/krew.tar.gz" &&
-      tar zxvf krew.tar.gz &&
-      KREW=./krew-"$(uname | tr '[:upper:]' '[:lower:]')_$(uname -m | sed -e 's/x86_64/amd64/' -e 's/arm.*$/arm/')" &&
-      "$KREW" install krew
-    )
-  }
-else # it is installed, expose it on the path
-  # for future reference, list of plugins are available here: https://krew.sigs.k8s.io/plugins/
-  export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
-  # consider installing these:
-  # kubectl krew install fuzzy rbac-lookup popeye tail
-fi
 
 # scrapes the raw metrics endpoint
 # flattens and ignores multiple containers per pod
