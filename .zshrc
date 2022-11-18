@@ -3,6 +3,14 @@ if [[ $- != *i* ]] ; then
         return
 fi
 
+if [[ -n "${ENABLE_ZSH_PROFILING}" ]]; then
+    zmodload zsh/zprof
+fi
+
+function profile_zsh_startup() {
+    time ENABLE_ZSH_PROFILING=true zsh -i -c exit
+}
+
 # centralized history for multiplexed shells
 setopt share_history extended_history
 HISTFILE=~/.zhistory
@@ -30,3 +38,7 @@ source ~/.zsh/source_modular.sh
 
 # apply the theme
 source ~/.zsh/bira.zsh-theme
+
+if [[ -n "${ENABLE_ZSH_PROFILING}" ]]; then
+    zprof
+fi
