@@ -1,8 +1,3 @@
-if [[ $- != *i* ]] ; then
-        # Shell is non-interactive.
-        return
-fi
-
 if [[ -n "${ENABLE_ZSH_PROFILING}" ]]; then
     zmodload zsh/zprof
 fi
