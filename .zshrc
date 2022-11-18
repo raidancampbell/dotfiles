@@ -1,16 +1,15 @@
 if [[ $- != *i* ]] ; then
-        # Shell is non-interactive.  Be done now!
+        # Shell is non-interactive.
         return
 fi
 
-# centralized history for multiple instances
+# centralized history for multiplexed shells
 setopt share_history extended_history
 HISTFILE=~/.zhistory
 HISTSIZE=SAVEHIST=1000000
 setopt hist_expire_dups_first hist_ignore_space hist_verify
 
-# instead of "'x' is a directory", it now cd's to 'x'
-setopt auto_cd auto_pushd
+setopt auto_cd auto_pushd # instead of "'x' is a directory", it now cd's to 'x'
 setopt no_beep # gotta be nice to the people who host the box remotely
 setopt menu_complete
 setopt interactive_comments
