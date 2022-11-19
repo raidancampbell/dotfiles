@@ -66,7 +66,7 @@ function log() {
   cat "$fname" >"$tmpfile"
 
   # timestamp the new file
-  echo "$dstring" >>"$tmpfile"
+  echo "\t$dstring" >>"$tmpfile"
 
   # record the edit time of the new file
   local initial_ts
