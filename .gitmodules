@@ -1,3 +1,9 @@
 [submodule ".zsh/zsh-syntax-highlighting"]
 	path = .zsh/zsh-syntax-highlighting
 	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
+[submodule ".zsh/zsh-histdb"]
+	path = .zsh/zsh-histdb
+	url = https://github.com/larkery/zsh-histdb.git
+[submodule ".zsh/zsh-histdb-fzf"]
+	path = .zsh/zsh-histdb-fzf
+	url = https://github.com/m42e/zsh-histdb-fzf.git
