@@ -35,12 +35,7 @@ function git_prompt_info() {
 # Checks if working tree is dirty
 function parse_git_dirty() {
   local STATUS=''
-  local FLAGS
-  FLAGS=('--porcelain')
-  if [[ $POST_1_7_2_GIT -gt 0 ]]; then
-    FLAGS+='--ignore-submodules=dirty'
-  fi
-  STATUS=$(command git status ${FLAGS} 2> /dev/null | tail -n1)
+  STATUS=$(command git status --porcelain --ignore-submodules=dirty 2> /dev/null | tail -n1)
   if [[ -n $STATUS ]]; then
     echo "*"
   fi
