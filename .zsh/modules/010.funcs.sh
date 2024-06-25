@@ -34,6 +34,7 @@ ex() {
           *.zip) unzip $1;;
           *.Z) uncompress $1;;
           *.7z) 7z x $1;;
+          *.zstd) unzstd $1;;
           *.dmg) hdiutul mount $1;; # mount OS X disk images
           *) echo "'$1' cannot be extracted via >ex<";;
     esac
