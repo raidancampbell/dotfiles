@@ -23,3 +23,11 @@ unbind M-B all
 bind M-B prevword main
 unbind M-F all
 bind M-F nextword main
+
+# courtesy of https://shafi.ddns.net/blog/customize-nano-text-editor
+set mouse
+set tabsize 2
+set positionlog
+set autoindent
+set linenumbers
+set indicator
